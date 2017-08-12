@@ -45,11 +45,11 @@ WORKDIR ${HOME}
 
 #### ---- !! Remember to comment out the COPY below when deployed ----
 ## -- Local dev mode --
-COPY ${JETTY_TAR_FILE} ${HOME}/
+#COPY ${JETTY_TAR_FILE} ${HOME}/
 
 #### ---- !! Remember to uncomment wget below when deployed ----
 ## -- Deploy mode --
-#RUN wget -c ${JETTY_DOWNLOAD} 
+RUN wget -c ${JETTY_DOWNLOAD} 
 
 RUN tar xvf ${JETTY_TAR_FILE} && \
     rm ${JETTY_TAR_FILE} && \

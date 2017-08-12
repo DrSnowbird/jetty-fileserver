@@ -29,7 +29,7 @@ RUN \
 ENV JETTY_BASE=${HOME}/jetty_base
 
 #### ---- Copy "jetty_base" as customized "webapps" directory ---
-ADD jetty_base ${JETTY_BASE}
+#ADD jetty_base ${JETTY_BASE}
 
 #### ---- Jetty setup ----
 ARG JETTY_DOWNLOAD=${JETTY_DOWNLOAD:-http://central.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.6.v20170531/jetty-distribution-9.4.6.v20170531.tar.gz}
@@ -51,21 +51,17 @@ COPY ${JETTY_TAR_FILE} ${HOME}/
 ## -- Deploy mode --
 #RUN wget -c ${JETTY_DOWNLOAD} 
 
-RUN \
-    tar xvf ${JETTY_TAR_FILE} && \
+RUN tar xvf ${JETTY_TAR_FILE} && \
     rm ${JETTY_TAR_FILE} && \
     ln -s ${JETTY_WEBAPPS} /jetty_base  && \
     chown ${USER_NAME}:${USER_NAME} -R /home/${USER_NAME} && \
-    #ln -s ${JETTY_BASE} /jetty_base && \
     chown ${USER_NAME}:${USER_NAME} /jetty_base
 
-RUN echo "----------- debug -----------" && \
-    ls -al $JETTY_BASE && \
-    ls -al $JETTY_HOME && \
-    ls -al $JETTY_HOME/start.jar && \
-    ls -al /home/developer/jetty-distribution-9.4.6.v20170531 && \
-    ls ${HOME} && \
-    echo "JETTY_BASE=$JETTY_BASE"
+#RUN echo "----------- debug -----------" && \
+#    ls -al $JETTY_HOME && \
+#    ls -al $JETTY_HOME/start.jar && \
+#    ls -al /home/developer/jetty-distribution-9.4.6.v20170531 && \
+#    ls ${HOME}
 
 #### ---- Change to user mode ----
 USER ${USER_NAME}

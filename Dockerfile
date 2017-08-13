@@ -2,7 +2,9 @@ FROM openkbs/jre-base
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
-#### ---- User setup ----
+#### ------------------------------------------------------------------------
+#### ---- User setup so we don't use root as user ----
+#### ------------------------------------------------------------------------
 ARG USER_ID=${USER_ID:-1000}
 ENV USER_ID=${USER_ID}
 
@@ -31,7 +33,9 @@ ENV JETTY_BASE=${HOME}/jetty_base
 #### ---- Copy "jetty_base" as customized "webapps" directory ---
 #ADD jetty_base ${JETTY_BASE}
 
-#### ---- Jetty setup ----
+#### ------------------------------------------------------------------------
+#### ---- Jetty environment vars ----
+#### ------------------------------------------------------------------------
 ARG JETTY_DOWNLOAD=${JETTY_DOWNLOAD:-http://central.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.6.v20170531/jetty-distribution-9.4.6.v20170531.tar.gz}
 ENV JETTY_DOWNLOAD=${JETTY_DOWNLOAD}
 
@@ -43,6 +47,15 @@ ENV JETTY_WEBAPPS=${JETTY_HOME}/webapps
 
 WORKDIR ${HOME}
 
+#### ------------------------------------------------------------------------
+#### ---- Entrypoint setup -----
+#### ------------------------------------------------------------------------
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh 
+
+#### ------------------------------------------------------------------------
+#### ---- Jetty setup ----
+#### ------------------------------------------------------------------------
 #### ---- !! Remember to comment out the COPY below when deployed ----
 ## -- Local dev mode --
 #COPY ${JETTY_TAR_FILE} ${HOME}/
@@ -63,7 +76,9 @@ RUN tar xvf ${JETTY_TAR_FILE} && \
 #    ls -al /home/developer/jetty-distribution-9.4.6.v20170531 && \
 #    ls ${HOME}
 
+#### ------------------------------------------------------------------------
 #### ---- Change to user mode ----
+#### ------------------------------------------------------------------------
 USER ${USER_NAME}
 
 #### ----- jetty_base: for user's webapp directory for Jetty as FTP file server ----   
@@ -73,8 +88,6 @@ WORKDIR ${JETTY_HOME}
 EXPOSE 8080
 
 #### ---- Run/Start Jetty Server now ----
-#ENTRYPOINT "/usr/java/bin/java" "-jar" "$JETTY_HOME/start.jar"
-copy entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 CMD "/usr/java/bin/java" "-jar" "$JETTY_HOME/start.jar"
 

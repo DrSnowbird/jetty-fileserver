@@ -1,6 +1,6 @@
 *.swp
 
-jetty-distribution-9.4.6.v20170531/
+jetty-distribution*
 
 # Compiled class file
 *.class

@@ -25,7 +25,8 @@ function displayPortainerURL() {
 ##################################################
 #### ---- Mandatory: Change those ----
 ##################################################
-imageTag=${1:-"openkbs/jetty-fileserver"}
+DOCKER_IMAGE_REPO="$(basename `pwd`)"
+imageTag=${1:-"openkbs/${DOCKER_IMAGE_REPO}"}
 
 PACKAGE=`echo ${imageTag##*/}|tr "/\-: " "_"`
 

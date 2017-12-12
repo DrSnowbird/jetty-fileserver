@@ -16,19 +16,26 @@ docker pull openkbs/jetty-fileserver
 FROM openkbs/jetty-fileserver
 ```
 
-## Copy your data folder under jetty_base
-The default "run.sh" use the following base FTP directory. 
-
+## Prepare your Web Folder
+The default "run.sh" use the following base FTP directory.
 * Important: You need to copy your data folder "UNDER" the folder "jetty_base":
 
 ```
     $HOME/data-docker/jetty_fileserver/jetty_base/
 ```
 
-Simply, you copy "source\_data\_folder" under the "jetty_base" folder:
+### Copy your "<source_path>/data" under the "jetty_base" folder:
 
 ```
-    cp -r <source_data_filer> $HOME/data-docker/jetty_fileserver/jetty_base/
+    cp -r <source_path>/data $HOME/data-docker/jetty_fileserver/jetty_base/
+```
+
+### Web File URL Access
+For production, you need to configure Jetty to support https to be secured transport.
+```
+http://<host_ip>:18080/data
+or
+http://localhost:18080/data (if you are on the same local host)
 ```
 
 ## Run the image
@@ -58,4 +65,3 @@ docker run -d --name some-jetty-fileserver -i -t my/jetty-fileserver
 ```
 docker exec -it some-jetty-fileserver /bin/bash
 ```
-

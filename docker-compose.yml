@@ -1,10 +1,11 @@
 version: '3' 
 services:
-  docker-nebteans:
+  jetty-fileserver:
     image: openkbs/jetty-fileserver
     build:
-      context: ./Dockerfile
-    container_name: docker-jetty-fileserver
+      context: .
+      dockerfile: Dockerfile
+    container_name: jetty-fileserver
     environment:
       - USER_ID=${USER_ID:-1000}
       - GROUP_ID=${GROUP_ID:-1000}

@@ -12,6 +12,6 @@ services:
     env_file:
       - ./docker.env
     volumes:
-      - $HOME/data-docker/jetty-fileserver:/jetty_base
+      - ./jetty_base:/home/developer/jetty_base
 
 

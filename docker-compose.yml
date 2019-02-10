@@ -11,6 +11,8 @@ services:
       - GROUP_ID=${GROUP_ID:-1000}
     env_file:
       - ./docker.env
+    ports:
+      - 18080:8080
     volumes:
       - ./jetty_base:/home/developer/jetty_base
 

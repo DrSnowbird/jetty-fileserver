@@ -1,14 +1,17 @@
-# Jetty as Fileserver in a Docker Container
+# Jetty + Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5/2.7 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.3 in Container
+
+[![](https://images.microbadger.com/badges/image/openkbs/jetty-fileserver.svg)](https://microbadger.com/images/openkbs/jetty-fileserver "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jetty-fileserver.svg)](https://microbadger.com/images/openkbs/jetty-fileserver "Get your own version badge on microbadger.com")
 
 # Components:
 * Jetty version: 9.4.14.v20181114
-* java version "1.8.0_191"
-  Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
-  Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
+* java version "1.8.0_202"
+  Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
+  Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
 * Apache Maven 3.6.0
-* Python 3.5.2
-* npm 3.5.2 + nodejs v4.2.6
-* Gradle 5.1
+* Python 3.5.2 / Python 2.7.12 + pip 19.0.3 + Python3 virtual environments
+* Node v11.11.0 + npm 6.7.0 (from NodeSource official Node Distribution)
+* Gradle 5.3
+* Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 # Run (recommended for easy-start)
 Image is pulling from openkbs/mongodb-compass

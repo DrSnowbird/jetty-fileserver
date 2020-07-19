@@ -1,17 +1,12 @@
-# Jetty + Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5/2.7 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.3 in Container
+# Jetty 9 + Java 8 OpenJDK + Maven 3.6 + Python 3.6 + pip 20.0 + node 14 + npm 6 + Gradle 8 
 
 [![](https://images.microbadger.com/badges/image/openkbs/jetty-fileserver.svg)](https://microbadger.com/images/openkbs/jetty-fileserver "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jetty-fileserver.svg)](https://microbadger.com/images/openkbs/jetty-fileserver "Get your own version badge on microbadger.com")
 
 # Components:
-* Jetty version: 9.4.14.v20181114
-* java version "1.8.0_202"
-  Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
-  Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
-* Apache Maven 3.6.0
-* Python 3.5.2 / Python 2.7.12 + pip 19.0.3 + Python3 virtual environments
-* Node v11.11.0 + npm 6.7.0 (from NodeSource official Node Distribution)
-* Gradle 5.3
-* Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
+* Jetty version: 9.4.30.v20200611
+* Base Components (e.g., Maven, Java, NodeJS, etc.)
+  * See [openkbs/jdk-mvn-py3 - Components](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Components)
+  * See [openkbs/jdk-mvn-py3 - Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
 
 # Run (recommended for easy-start)
 Image is pulling from openkbs/mongodb-compass
@@ -37,7 +32,7 @@ The default "run.sh" use the following base FTP directory.
 ## Web File URL Access
 For production, you need to configure Jetty to support https to be secured transport.
 ```
-http://<host_ip>:18080/jetty_base/ (if remotely access the Jetty FTP server)
+http://<host_ip>:18080/jetty_base/ (if you remotely access the Jetty FTP server)
 or
 http://localhost:18080/jetty_base/ (if you are on the same local host)
 ```

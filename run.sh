@@ -61,16 +61,8 @@ RESTART_OPTION=${RESTART_OPTION:-no}
 ## More optional values:
 ##   Add any additional options here
 ## ------------------------------------------------------------------------
-#MORE_OPTIONS="--privileged=true"
-MORE_OPTIONS=""
-
-## ------------------------------------------------------------------------
-## Multi-media optional values:
-##   Add any additional options here
-## ------------------------------------------------------------------------
-#MEDIA_OPTIONS=" --device /dev/snd --device /dev/dri  --device /dev/video0  --group-add audio  --group-add video "
-MEDIA_OPTIONS=" --device /dev/snd --device /dev/dri  --group-add audio  --group-add video "
-#MEDIA_OPTIONS=
+# MORE_OPTIONS="--privileged=true"
+MORE_OPTIONS=
 
 ###############################################################################
 ###############################################################################
@@ -152,30 +144,12 @@ ORGANIZATION=openkbs
 baseDataFolder="$HOME/data-docker"
 
 ###################################################
-#### ---- Detect Host OS Type and minor Tweek: ----
-###################################################
-SED_MAC_FIX="''"
-CP_OPTION="--backup=numbered"
-HOST_IP=127.0.0.1
-function get_HOST_IP() {
-    if [[ "$OSTYPE" == "linux-gnu" ]]; then
-        # Linux ...
-        HOST_IP=`ip route get 1|grep via | awk '{print $7}' `
-        SED_MAC_FIX=
-    elif [[ $OSTYPE == darwin* ]]; then
-        # Mac OSX
-        HOST_IP=`ifconfig | grep "inet " | grep -Fv 127.0.0.1 | grep -Fv 192.168 | awk '{print $2}'`
-        CP_OPTION=
-    fi
-    echo "HOST_IP=${HOST_IP}"
-}
-get_HOST_IP
-MY_IP=${HOST_IP}
-
-###################################################
 #### **** Container package information ****
 ###################################################
+#### (The following only good for Linux - not for Mac)
 MY_IP=` hostname -I|awk '{print $1}'`
+MY_IP=`ip route get 1|awk '{print$NF;exit;}'`
+
 DOCKER_IMAGE_REPO=`echo $(basename $PWD)|tr '[:upper:]' '[:lower:]'|tr "/: " "_" `
 imageTag="${ORGANIZATION}/${DOCKER_IMAGE_REPO}"
 #PACKAGE=`echo ${imageTag##*/}|tr "/\-: " "_"`
@@ -625,8 +599,6 @@ function setupDisplayType() {
         echo ${DISPLAY}
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
-        # if you want to multi-media, you need customize it here
-        MEDIA_OPTIONS=
         xhost + 127.0.0.1
         export DISPLAY=host.docker.internal:0
         echo ${DISPLAY}
@@ -713,6 +685,7 @@ case "${BUILD_TYPE}" in
         sudo docker run \
             --name=${instanceName} \
             --restart=${RESTART_OPTION} \
+            --network host \
             ${REMOVE_OPTION} ${RUN_OPTION} ${MORE_OPTIONS} ${CERTIFICATE_OPTIONS} \
             ${X11_OPTION} ${MEDIA_OPTIONS} \
             ${privilegedString} \

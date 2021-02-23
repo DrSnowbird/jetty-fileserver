@@ -37,7 +37,7 @@ if [ "$1" = "-d" ]; then
     RUN_TYPE=1
     shift 1
 fi
-RUN_TYPE=${RUN_TYPE:-0}
+RUN_TYPE=${RUN_TYPE:-1}
 
 ## ------------------------------------------------------------------------
 ## Change to one (1) if run.sh needs to use host's user/group to run the Container

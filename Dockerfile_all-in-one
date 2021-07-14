@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openkbs/jdk-mvn-py3
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
@@ -23,24 +23,16 @@ ENV WORKSPACE=${HOME}/workspace
 #### ------------------------------------------------------------------------
 ENV JETTY_VERSION=9.4.30.v20200611
 
-###################################
-#### ---- user: developer ---- ####
-###################################
-ENV USER_ID=${USER_ID:-1000}
-ENV GROUP_ID=${GROUP_ID:-1000}
-ENV USER=${USER:-developer}
-ENV HOME=/home/${USER}
-
-RUN useradd -ms /bin/bash ${USER} && \
-    export uid=${USER_ID} gid=${GROUP_ID} && \
-    mkdir -p /home/${USER} && \
-    mkdir -p /home/${USER}/workspace && \
-    mkdir -p /etc/sudoers.d && \
-    echo "${USER}:x:${USER_ID}:${GROUP_ID}:${USER},,,:/home/${USER}:/bin/bash" >> /etc/passwd && \
-    echo "${USER}:x:${USER_ID}:" >> /etc/group && \
-    echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} && \
-    chmod 0440 /etc/sudoers.d/${USER} && \
-    chown ${USER}:${USER} -R /home/${USER}
+#RUN useradd -ms /bin/bash ${USER} && \
+#    export uid=${USER_ID} gid=${GROUP_ID} && \
+#    mkdir -p /home/${USER} && \
+#    mkdir -p /home/${USER}/workspace && \
+#    mkdir -p /etc/sudoers.d && \
+#    echo "${USER}:x:${USER_ID}:${GROUP_ID}:${USER},,,:/home/${USER}:/bin/bash" >> /etc/passwd && \
+#    echo "${USER}:x:${USER_ID}:" >> /etc/group && \
+#    echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} && \
+#    chmod 0440 /etc/sudoers.d/${USER} && \
+#    chown ${USER}:${USER} -R /home/${USER}
 
 #### ---- Copy "jetty_base" as customized "webapps" directory ---
 #ADD jetty_base ${JETTY_BASE}
@@ -57,9 +49,6 @@ ARG JETTY_TAR_FILE=${JETTY_DISTRIBUTION}.tar.gz
 ENV JETTY_HOME=${HOME}/${JETTY_DISTRIBUTION}
 ENV JETTY_WEBAPPS=${JETTY_HOME}/webapps
 
-RUN apt-get update && apt-get install -y sudo
-
-USER ${USER}
 WORKDIR ${HOME}
 
 #### ------------------------------------------------------------------------

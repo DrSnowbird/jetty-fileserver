@@ -31,3 +31,5 @@ hs_err_pid*
 !pizza.owl
 !pizza-with-swrl-rule.owl
 
+**jetty_base/
+

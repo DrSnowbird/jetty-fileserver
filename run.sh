@@ -37,7 +37,7 @@ if [ "$1" = "-d" ]; then
     RUN_TYPE=1
     shift 1
 fi
-RUN_TYPE=${RUN_TYPE:-1}
+RUN_TYPE=${RUN_TYPE:-0}
 
 ## ------------------------------------------------------------------------
 ## Change to one (1) if run.sh needs to use host's user/group to run the Container
@@ -55,7 +55,7 @@ if [ "$1" = "-a" ] && [ "${RUN_TYPE}" = "1" ] ; then
     RESTART_OPTION=always
     shift 1
 fi
-RESTART_OPTION=${RESTART_OPTION:-no}
+RESTART_OPTION=${RESTART_OPTION:-always}
 
 ## ------------------------------------------------------------------------
 ## More optional values:

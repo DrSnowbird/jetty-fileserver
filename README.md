@@ -1,4 +1,4 @@
-# Jetty 9 + Java 8 OpenJDK + Maven 3.6 + Python 3.6 + pip 20.0 + node 14 + npm 6 + Gradle 8 
+# Jetty 9 + Java 11 OpenJDK
 
 [![](https://images.microbadger.com/badges/image/openkbs/jetty-fileserver.svg)](https://microbadger.com/images/openkbs/jetty-fileserver "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jetty-fileserver.svg)](https://microbadger.com/images/openkbs/jetty-fileserver "Get your own version badge on microbadger.com")
 
@@ -9,7 +9,7 @@
   * See [openkbs/jdk-mvn-py3 - Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
 
 # Run (recommended for easy-start)
-Image is pulling from openkbs/mongodb-compass
+Image is pulling from openkbs/jetty-fileserver
 ```
 ./run.sh
 ```
